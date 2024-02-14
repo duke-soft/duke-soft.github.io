@@ -1,0 +1,55 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+* {
+  font-family: 'Jost', sans-serif;
+}
+
+#main {
+  width: 500px;
+  margin: auto;
+}
+
+h1 {
+  margin: 10px;
+  color: white;
+}
+
+p {
+  color: white;
+  font-size: 10pt;
+  display: inline-block;
+}
+
+input {
+  color: white;
+  background-color: black;
+  border-color: transparent;
+  border-radius: 3px;
+  width: 3em;
+}
+
+button {
+  color: white;
+  border-color: black;
+  border-radius: 3px;
+  background-color: black;
+}
+
+#help, a {
+  font-style: italic;
+  color: #6895c4;
+}
+
+#menu {
+  border: 1px solid #25507D;
+  border-radius: 5px;
+  background-color: #25507D;
+  padding: 5px;
+  margin: 10px;
+  width: 500px;
+}
