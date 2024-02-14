@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>GraphFormer</title>
+  <link rel="icon" href=icon.png>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="main">
+    <h1>GraphFormer</h1>
+    <canvas id="canvas" width=500 height=500></canvas>
+    <br>
+    <div id="menu">
+      <button id="add-vertex" onclick="addVertex()">Add Vertex</button>
+      <button id="del-vertex" onclick="removeVertex()">Remove Vertex</button>
+      <button id="add-frame" onclick="addFrame()">New Frame</button>
+      <button id="del-frame" onclick="removeFrame()">Remove Frame</button>
+    </div>
+    <div id="menu">
+      <p>Current Frame: <input type="number" id="current-frame" value=1 step=1 min=1></p>
+      <p>Speed (sec): <input type="number" id="speed" value=2 step=0.1 min=0.1></p>
+      <button id="rewind-step" onclick="rewindStep()">|◀</button>
+      <button id="rewind" onclick="rewind()">◀</button>
+      <button id="stop" onclick="stop()">⬜</button>
+      <button id="play" onclick="play()">▶</button>
+      <button id="play-step" onclick="playStep()">▶|</button>
+    </div>
+    <div id="menu">
+      <p id="help">Click and drag to move vertices.<br>Shift + drag to connect vertices.<br>Ctrl + click to disconnect a
+        vertex.</p><br>
+    </div>
+    <div id="menu">
+      <button id="save" onclick="save()">Save</button>
+      <p>Load: <input id="file" type="file" accept=".gf" style="width:auto;" onchange="load()"></p>
+    </div>
+    <div id="menu">
+      <button id="toggle-help" onclick="help()">Show Help</button>
+      <p id="guide"></p>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
