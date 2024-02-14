@@ -1,0 +1,16 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  font-family: 'Consolas';
+  color: white;
+}
+
+body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
