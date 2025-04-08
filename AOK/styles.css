@@ -16,9 +16,9 @@ body {
 #analytics-container {
     font-family: 'Lucida Console', monospace;
     position: fixed;
-    top: 60px;
+    top: 30px;
     left: 30px;
-    width: 300px;
+    width: auto;
     background-color: #151616d0;
     border-radius: 10px;
     z-index: 9999;
@@ -33,4 +33,8 @@ body {
     font-weight: 360;
     font-size: 10pt;
     font-style: italic;
+}
+
+a {
+    font-family: 'Lucida Console', monospace;
 }

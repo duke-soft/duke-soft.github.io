@@ -1,0 +1,74 @@
+body {
+    font-family: 'Lucida Console', monospace;
+    background-color: #151616;
+    color: #d8e0dd;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+a {
+    font-family: 'Lucida Console', monospace;
+}
+
+#desc {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 8pt;
+    color: #b1b9b6;
+}
+
+#download {
+    text-decoration: underline;
+    color: yellow;
+    cursor: pointer;
+}
+
+#post-data-container {
+    height: 300px;
+    overflow-y: scroll;
+    border: solid white;
+    border-radius: 8px;
+}
+
+#post-data-item {
+    background-color: #272929;
+    border-radius: 8px;
+    padding: 1px;
+    margin: 5px;
+}
+
+#post-id {
+    margin-left: 4px;
+}
+
+#post-id:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#post-detail {
+    margin-left: 4px;
+    font-size: 8pt;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 5px;
+}
+
+tr {
+    border: solid;
+}
+
+tr:nth-child(even) {
+    background-color: #272929;
+}
+
+td:nth-child(even) {
+    text-align: right;
+}

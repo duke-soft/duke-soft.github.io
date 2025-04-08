@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AOK - analytics</title>
+        <link rel="icon" href="../images/aok-icon.png" type="image/png">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <a href="../index.html">&lt; Back</a>
+        <h1>Overview</h1>
+        <table>
+            <tr>
+                <th>Statistic</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>
+                    User IP address
+                    <p id="desc">The user's IP address, if available.</p>
+                </td>
+                <td id="user-ip"></td>
+            </tr>
+            <tr>
+                <td>
+                    User agent information
+                    <p id="desc">Information about the user's browser and OS.</p>
+                </td>
+                <td id="user-agent"></td>
+            </tr>
+            <tr>
+                <td>
+                    Access date
+                    <p id="desc">The date the user accessed the site.</p>
+                </td>
+                <td id="access-date"></td>
+            </tr>
+            <tr>
+                <td>
+                    Session time
+                    <p id="desc">The total amount of time the user spent on the page.</p>
+                </td>
+                <td id="session-time">0.00 s</td>
+            </tr>
+            <tr>
+                <td>
+                    Average post view time
+                    <p id="desc">The average amount of time a post was visible on screen for.</p>
+                </td>
+                <td id="avg-view-time">0.00 s</td>
+            </tr>
+            <tr>
+                <td>
+                    Average scroll speed
+                    <p id="desc">Average page scrolling speed in pixels per second.</p>
+                </td>
+                <td id="avg-scroll-speed">0.00 px/s</td>
+            </tr>
+            <tr>
+                <td>
+                    Total user likes
+                    <p id="desc">Number of times the current user clicked the like button.</p>
+                </td>
+                <td id="total-likes">0</td>
+            </tr>
+            <tr>
+                <td>
+                    Total user unlikes
+                    <p id="desc">Number of times the current user unliked a post.</p>
+                </td>
+                <td id="total-unlikes">0</td>
+            </tr>
+            <tr>
+                <td>
+                    Page updates triggered
+                    <p id="desc">Number of times the user reached the bottom of the posts page and triggered an update to generate more.</p>
+                </td>
+                <td id="updates-triggered">0</td>
+            </tr>
+        </table>
+        <p id="download" onclick="save()">Download your data</p>
+        <div style="display: flex; align-items: first baseline;">
+            <h1>Post-specific data</h1>
+            <p style="margin-left: auto;">Engagement score</p>
+        </div>
+        <div id="post-data-container">
+
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

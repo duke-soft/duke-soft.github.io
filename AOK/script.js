@@ -167,8 +167,15 @@ function generatePostElements(start_index) {
             check_time: -1,
             view_time: 0,
             last_view_time: 0,
+            total_view_time: 0,
             user_likes: 0,
-            user_unlikes: 0
+            user_unlikes: 0,
+            genre: posts[i].genre,
+            profile: posts[i].profile,
+            likes: posts[i].likes,
+            post_id: i,
+            post_src: posts[i].src,
+            avg_scroll_speed: 0
         }
     }
 
