@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>AOK</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-  <div id="main-content">
-    <p style="color: grey;">~ Analyze your YT watch history ~</p>
-    <p style="color: grey;">First, download your YT watch history as JSON from Google Takeout.</p>
-    <p>Do you watch YT Shorts?
-      <input type="radio" id="yes" name="shorts" onchange="load()" />
-      <label for="yes">Yes</label>
-      <input type="radio" id="no" name="shorts" onchange="load()" />
-      <label for="no">No</label>
-    </p>
-    <p>Watch History JSON file: <input id="file" type="file" accept=".json" onchange="load()"></p>
-    <p>===============================</p>
-    <p id="output"></p>
-  </div>
-  <script src="script.js"></script>
-</body>
-  
+    <head>
+        <title>AOK</title>
+        <link rel="icon" href="images/aok-icon.png" type="image/png">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="posts-container"></div>
+        <div id="analytics-container">
+            <div style="text-align: center;">
+                <img src="images/drag-icon.png" width="30">
+            </div>
+            <p style=><img src="images/analytics-icon.svg" width="16"> Analytics</p>
+            <div id="analytics">
+                <p id="avg-view-time" style="color: yellow">Average view time: 0.00 s</p>
+                <p id="scroll-speed" style="color: yellow">Scroll speed: 0 px/s</p>
+                <p id="total-likes" style="color: rgb(8, 197, 8)">Total likes: 0</p>
+                <p id="total-unlikes" style="color:red">Total unlikes: 0</p>
+                <p id="genre-likes" style="color: rgb(0, 102, 255)">Favorite genre (likes): unknown</p>
+            </div>
+        </div>
+    </body>
+    <script src="profiles.js"></script>
+    <script src="analytics.js"></script>
+    <script src="script.js"></script>
+    <script src="drag-container.js"></script>
 </html>
