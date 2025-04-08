@@ -3,11 +3,10 @@
  * @description: This script creates a simple social media post layout using JavaScript.
  */
 
-// Define width of the post images in pixels
-const post_width_value = 440
+const genre_imgs_count = 9   // Number of images per genre
+const init_post_count  = 15  // Initial number of posts to generate
+const post_width_value = 440 // Width of the post images in pixels
 const post_width = post_width_value + 'px'
-const post_img_count = 9
-const init_post_count = 20
 const genres = ['nature', 'humor', 'motivational', 'educational']
 
 // Array to store post objects
@@ -133,20 +132,25 @@ function generatePosts(count) {
         let genre = ''
 
         do {
+            // Choose a random profile and get its name and genre
             const profile = profiles[Math.floor(Math.random() * profiles.length)]
             name  = profile.name
             genre = profile.genre
 
+            // If the genre is 'misc', choose a random genre from the available genres
             if (profile.genre == 'misc') {
                 genre = genres[Math.floor(Math.random() * genres.length)]
             }
 
-            const src_index = Math.floor(Math.random() * post_img_count) + 1
+            // Get a random, unused image from the specified genre
+            const src_index = Math.floor(Math.random() * genre_imgs_count) + 1
             src = 'images/posts/' + genre + '/' + genre + src_index + '.jpg'
         
         } while (used_imgs.includes(src))
+        // Mark this image as used
         used_imgs.push(src)
 
+        // Create a new post with the randomly chosen image, profile name, and genre
         createPost(src, name, genre)
     }
 }
@@ -158,6 +162,7 @@ function generatePostElements(start_index) {
         posts_container.appendChild(post)
         posts_container.appendChild(document.createElement('br'))
 
+        // Create a new analytics entry for this post
         analytics.post_stats[i] = {
             check_time: -1,
             view_time: 0,
@@ -166,12 +171,30 @@ function generatePostElements(start_index) {
             user_unlikes: 0
         }
     }
+
+    analytics.gens_triggered ++
 }
 
 // Function to clear the used images array
-function clearUsedImgs() {
+function clearUsedImages() {
     used_imgs = []
+}
+
+function keepGeneratingPosts() {
+    const page_y = window.scrollY + window.innerHeight
+
+    if (used_imgs.length >= (genre_imgs_count * genres.length) - 5) {
+        clearUsedImages()
+    }
+
+    if (page_y >= document.body.scrollHeight - analytics.scroll_speed) {
+        let generate_index = posts.length
+        generatePosts(6)
+        generatePostElements(generate_index)
+    }
 }
 
 generatePosts(init_post_count)
 generatePostElements(0)
+
+setInterval(keepGeneratingPosts, 500)

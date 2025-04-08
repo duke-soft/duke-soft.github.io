@@ -2,6 +2,7 @@ let analytics = {
     scroll_speed: 0,
     total_likes: 0,
     total_unlikes: 0,
+    gens_triggered: 0,
     post_stats: {}
 }
 
@@ -112,6 +113,9 @@ function updateAnalytics() {
 
     const fav_genre_likes_label = document.getElementById('genre-likes')
     fav_genre_likes_label.innerHTML = `Favorite genre (likes): ${getFavoriteGenreLikes()}`
+
+    const gens_triggered_label = document.getElementById('gens-triggered')
+    gens_triggered_label.innerHTML = `Page updates triggered: ${analytics.gens_triggered}`
 }
 
 setInterval(trackScrollSpeed, 50)
