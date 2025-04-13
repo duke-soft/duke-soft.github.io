@@ -1,32 +1,46 @@
+/**
+ * stats.js
+ * 
+ * This script displays the collected user data and post statistics gathered from the posts page.
+ * 
+ * Author: Luke Dykstra
+ * Date: 2025-04-13
+ */
+
 const stats = document.getElementById('stats')
+// Retreive the analytics data from local storage if it exists
 const analytics = JSON.parse(localStorage.getItem('analytics')) || {
-    scroll_speed: 0,
+    scroll_speed:     0,
     avg_scroll_speed: 0,
-    avg_view_time: 0,
-    total_likes: 0,
-    total_unlikes: 0,
-    gens_triggered: 0,
-    post_stats: {}
+    avg_view_time:    0,
+    total_likes:      0,
+    total_unlikes:    0,
+    gens_triggered:   0,
+    post_stats:       {}
 }
 
-const user_ip_cell = document.getElementById('user-ip')
-const user_agent_cell = document.getElementById('user-agent')
-const access_date_cell = document.getElementById('access-date')
-const session_time_cell = document.getElementById('session-time')
-const avg_view_time_cell = document.getElementById('avg-view-time')
-const avg_scroll_speed_cell = document.getElementById('avg-scroll-speed')
-const total_likes_cell = document.getElementById('total-likes')
-const total_unlikes_cell = document.getElementById('total-unlikes')
+const user_ip_cell           = document.getElementById('user-ip')
+const user_agent_cell        = document.getElementById('user-agent')
+const access_date_cell       = document.getElementById('access-date')
+const session_time_cell      = document.getElementById('session-time')
+const posts_viewed_cell      = document.getElementById('posts-viewed')
+const avg_view_time_cell     = document.getElementById('avg-view-time')
+const avg_scroll_speed_cell  = document.getElementById('avg-scroll-speed')
+const post_freq_cell         = document.getElementById('post-freq')
+const total_likes_cell       = document.getElementById('total-likes')
+const total_unlikes_cell     = document.getElementById('total-unlikes')
 const updates_triggered_cell = document.getElementById('updates-triggered')
 
-user_ip_cell.innerText = analytics.user_ip
-user_agent_cell.innerText = analytics.user_agent
-access_date_cell.innerText = analytics.date
-session_time_cell.innerText = (analytics.session_time / 1000).toFixed(2) + ' s'
-avg_view_time_cell.innerText = (analytics.avg_view_time / 1000).toFixed(2) + ' s'
-avg_scroll_speed_cell.innerText = analytics.avg_scroll_speed.toFixed(2) + ' px/s'
-total_likes_cell.innerText = analytics.total_likes
-total_unlikes_cell.innerText = analytics.total_unlikes
+user_ip_cell.innerText           = analytics.user_ip
+user_agent_cell.innerText        = analytics.user_agent
+access_date_cell.innerText       = analytics.date
+session_time_cell.innerText      = (analytics.session_time / 1000).toFixed(2) + ' s'
+posts_viewed_cell.innerText      = analytics.posts_viewed
+avg_view_time_cell.innerText     = (analytics.avg_view_time / 1000).toFixed(2) + ' s'
+avg_scroll_speed_cell.innerText  = analytics.avg_scroll_speed.toFixed(2) + ' px/s'
+post_freq_cell.innerText         = (analytics.posts_viewed / (analytics.session_time / 60000)).toFixed(2) + ' posts/min'
+total_likes_cell.innerText       = analytics.total_likes
+total_unlikes_cell.innerText     = analytics.total_unlikes
 updates_triggered_cell.innerText = analytics.gens_triggered
 
 function newPostDetailElement(label, value) {
@@ -88,6 +102,7 @@ function newPostDataElement(post_data) {
     details_div.appendChild(newPostDetailElement('Last view time', post_data.last_view_time))
     details_div.appendChild(newPostDetailElement('Total view time', post_data.total_view_time))
     details_div.appendChild(newPostDetailElement('Scroll speed', post_data.avg_scroll_speed))
+    details_div.appendChild(newPostDetailElement('Timestamp', post_data.timestamp))
 
     data_div.appendChild(details_div)
 

@@ -1,3 +1,13 @@
+/**
+ * analytics.js
+ * 
+ * This script tracks and stores user data and interactions.
+ * 
+ * Authror: Luke Dykstra
+ * Date: 2025-04-13
+ */
+
+// Object to store the analytics data
 let analytics = {
     date: new Date().toISOString(),
     user_agent: window.navigator.userAgent,
@@ -8,11 +18,15 @@ let analytics = {
     total_unlikes: 0,
     gens_triggered: 0,
     session_time: 0,
+    posts_viewed: 0,
     user_ip: 'n/a',
     post_stats: {}
 }
 
+// Number of scroll speed data points to average
 const avg_scroll_poll_count = 100
+// Size of the buffer area to check if a post is on screen
+const view_height_buffer = 40
 
 let prev_scroll_y = window.scrollY
 let prev_scroll_time = performance.now()
@@ -22,6 +36,7 @@ let scroll_speed = 0
 let avg_scroll_speed = 0
 let scroll_speed_history = []
 
+// Track the current scroll speed using the window scroll Y and time delta between calls
 function trackScrollSpeed() {
     let current_scroll_y = window.scrollY
     let current_time     = performance.now()
@@ -50,11 +65,12 @@ function trackScrollSpeed() {
     analytics.avg_scroll_speed = avg_scroll_speed
 }
 
+// Track the on-screen viewing time of each post using its bounding rectangle
 function trackViewingTimes() {
     for (let post_id in analytics.post_stats) {
         const post = document.getElementById(post_id)
         const rect = post.getBoundingClientRect()
-        const on_screen = rect.top < window.innerHeight && rect.bottom > 0
+        const on_screen = (rect.top > view_height_buffer) && (rect.bottom < window.innerHeight - view_height_buffer)
 
         if (on_screen) {
             if (analytics.post_stats[post_id].check_time == -1) {
@@ -68,6 +84,7 @@ function trackViewingTimes() {
                 analytics.post_stats[post_id].last_view_time   = analytics.post_stats[post_id].view_time // The previous view time
                 analytics.post_stats[post_id].check_time       = current_time // Current time to help calculate time delta
                 analytics.post_stats[post_id].avg_scroll_speed = analytics.avg_scroll_speed // Update the average scroll speed for this post while we're at it
+                analytics.post_stats[post_id].timestamp        = new Date().toISOString() // Update the timestamp for this post
             }
         } else if (analytics.post_stats[post_id].view_time > 0) {
             analytics.post_stats[post_id].check_time = -1
@@ -78,6 +95,7 @@ function trackViewingTimes() {
     analytics.avg_view_time = getAverageViewTime()
 }
 
+// Get the average view time of all viewed posts
 function getAverageViewTime() {
     let total_view_time = 0
     let viewed_posts = 0
@@ -99,12 +117,14 @@ function getAverageViewTime() {
     }
 }
 
+// Estimate the user's favorite post genre based on their likes
 function getFavoriteGenreLikes() {
     let genre_likes = {
         'nature': 0,
         'humor': 0,
         'motivational': 0,
-        'educational': 0
+        'educational': 0,
+        'news': 0
     }
 
     for (let post_id in analytics.post_stats) {
@@ -125,12 +145,14 @@ function getFavoriteGenreLikes() {
     return favorite_genre
 }
 
+// Estimate the user's favorite post genre based on their view time
 function getFavoriteGenreViewTime() {
     let genre_view_time = {
         'nature': 0,
         'humor': 0,
         'motivational': 0,
-        'educational': 0
+        'educational': 0,
+        'news': 0
     }
 
     for (let post_id in analytics.post_stats) {
@@ -151,6 +173,20 @@ function getFavoriteGenreViewTime() {
     return favorite_genre
 }
 
+// Get the number of posts viewed by the user
+function getPostsViewed() {
+    let posts_viewed = 0
+
+    for (let post_id in analytics.post_stats) {
+        if (analytics.post_stats[post_id].last_view_time > 0) {
+            posts_viewed ++
+        }
+    }
+
+    return posts_viewed
+}
+
+// Get the user's IP address using the ipify API
 // Credit to Ryan from Medium.com:
 // https://medium.com/@ryan_forrester_/get-ip-address-in-javascript-how-to-guide-13c91383b33f
 async function getIP() {
@@ -163,12 +199,17 @@ async function getIP() {
     }
 }
 
+// Update the analytics live display on the posts page and save to local storage
 function updateAnalytics() {
     const time_delta = performance.now() - prev_time
     prev_time = performance.now()
     analytics.session_time += time_delta
     const session_time_label = document.getElementById('session-time')
     session_time_label.innerHTML = `Session time: ${(analytics.session_time / 1000).toFixed(2)} s`
+
+    const posts_viewd_label = document.getElementById('posts-viewed')
+    analytics.posts_viewed = getPostsViewed()
+    posts_viewd_label.innerHTML = `Posts viewed: ${analytics.posts_viewed}`
 
     const scroll_speed_label = document.getElementById('scroll-speed')
     scroll_speed_label.innerHTML = `Scroll speed: ${analytics.scroll_speed.toFixed(2)} px/s`

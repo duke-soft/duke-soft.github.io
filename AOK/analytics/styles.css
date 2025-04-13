@@ -10,6 +10,7 @@ h1 {
 
 a {
     font-family: 'Lucida Console', monospace;
+    color: rgb(86, 186, 219)
 }
 
 #desc {
@@ -51,6 +52,12 @@ a {
 #post-detail {
     margin-left: 4px;
     font-size: 8pt;
+}
+
+#information {
+    padding: 20px;
+    background-color: #411d33;
+    border-radius: 8px;
 }
 
 table {
