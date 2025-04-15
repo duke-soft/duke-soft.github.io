@@ -60,6 +60,14 @@ a {
     border-radius: 8px;
 }
 
+#footer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    color: rgb(79, 73, 73);
+}
+
 table {
     width: 100%;
 }

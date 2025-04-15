@@ -7,7 +7,7 @@
  * Date: 2025-04-13
  */
 
-const genre_imgs_count = 9   // Number of images per genre
+const genre_imgs_count = 12   // Number of images per genre
 const init_post_count  = 15  // Initial number of posts to generate
 const post_width_value = 440 // Width of the post images in pixels
 const post_width = post_width_value + 'px'
