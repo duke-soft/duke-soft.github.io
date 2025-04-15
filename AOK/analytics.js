@@ -61,7 +61,10 @@ function trackScrollSpeed() {
         avg_scroll_speed += scroll_speed_history[i]
     }
 
-    avg_scroll_speed /= scroll_speed_history.length
+    if (scroll_speed_history.length > 0) {
+        avg_scroll_speed /= scroll_speed_history.length
+    }
+    
     analytics.avg_scroll_speed = avg_scroll_speed
 }
 
@@ -70,7 +73,7 @@ function trackViewingTimes() {
     for (let post_id in analytics.post_stats) {
         const post = document.getElementById(post_id)
         const rect = post.getBoundingClientRect()
-        const on_screen = (rect.top > view_height_buffer) && (rect.bottom < window.innerHeight - view_height_buffer)
+        const on_screen = ((rect.top > view_height_buffer) && (rect.bottom < window.innerHeight - view_height_buffer)) || (post_id == 0 && rect.top >= 0 && rect.bottom < window.innerHeight - view_height_buffer)
 
         if (on_screen) {
             if (analytics.post_stats[post_id].check_time == -1) {
