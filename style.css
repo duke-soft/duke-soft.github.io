@@ -14,3 +14,7 @@ body {
   justify-content: center;
   margin-top: 10%;
 }
+
+i {
+    color: grey;
+}
